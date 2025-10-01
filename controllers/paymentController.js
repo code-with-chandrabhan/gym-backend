@@ -19,20 +19,11 @@ export const createCheckoutSession = async (req, res) => {
 
     let success_path = "/";
     switch (plan.name) {
-      case "Basic Plan":
-        success_path = "/plan/success/basic";
-        break;
-      case "Premium Plan":
-        success_path = "/plan/success/premium";
-        break;
-      case "Personal Training":
-        success_path = "/plan/success/personal";
-        break;
-      case "Group Classes":
-        success_path = "/plan/success/group";
-        break;
-      default:
-        success_path = "/pricing";
+      case "Basic Plan": success_path = "/plan/success/basic"; break;
+      case "Premium Plan": success_path = "/plan/success/premium"; break;
+      case "Personal Training": success_path = "/plan/success/personal"; break;
+      case "Group Classes": success_path = "/plan/success/group"; break;
+      default: success_path = "/pricing";
     }
 
     const session = await stripe.checkout.sessions.create({
