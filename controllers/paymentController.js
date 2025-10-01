@@ -4,13 +4,9 @@ dotenv.config();
 import Stripe from "stripe";
 import User from "../models/User.js";
 
-// const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
-//   apiVersion: "2022-11-15",
-// });
-app.get("/env-test", (req, res) => {
-  res.send(process.env.STRIPE_SECRET_KEY || "No STRIPE_SECRET_KEY found");
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+  apiVersion: "2022-11-15",
 });
-
 
 export const createCheckoutSession = async (req, res) => {
   try {
