@@ -25,7 +25,7 @@ router.get("/", (req, res) => {
   fs.readdir(uploadFolder, (err, files) => {
     if (err) return res.status(500).json({ error: err.message });
     const images = files.map((file) => ({
-      url: `http://localhost:5000/uploads/${file}`,
+      url: `https://gym-website-gray-six.vercel.app/uploads/${file}`,
     }));
     res.json(images);
   });
@@ -35,7 +35,7 @@ router.get("/", (req, res) => {
 router.post("/upload", upload.array("images", 16), (req, res) => {
   const files = req.files;
   const images = files.map((file) => ({
-    url: `http://localhost:5000/uploads/${file.filename}`,
+    url: `https://gym-website-gray-six.vercel.app/uploads/${file.filename}`,
   }));
   res.json(images);
 });
