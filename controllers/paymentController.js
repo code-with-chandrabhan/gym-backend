@@ -11,7 +11,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
 export const createCheckoutSession = async (req, res) => {
   try {
     const { plan, months, totalAmount, userId } = req.body;
-    const FRONTEND_URL_DEV = process.env.FRONTEND_URL_DEV;
+    const FRONTEND_URL_PROD= process.env.FRONTEND_URL_PROD;
 
     if (!plan || !months || !totalAmount || !userId) {
       return res.status(400).json({ error: "Missing required fields" });
@@ -51,8 +51,8 @@ export const createCheckoutSession = async (req, res) => {
           quantity: 1,
         },
       ],
-      success_url: `${FRONTEND_URL_DEV}${success_path}?session_id={CHECKOUT_SESSION_ID}&userId=${userId}&planName=${plan.name}&duration=${months}&amount=${totalAmount}`,
-      cancel_url: `${FRONTEND_URL_DEV}/pricing`,
+      success_url: `${FRONTEND_URL_PROD}${success_path}?session_id={CHECKOUT_SESSION_ID}&userId=${userId}&planName=${plan.name}&duration=${months}&amount=${totalAmount}`,
+      cancel_url: `${FRONTEND_URL_PROD}/pricing`,
     });
 
     res.json({ id: session.id });
